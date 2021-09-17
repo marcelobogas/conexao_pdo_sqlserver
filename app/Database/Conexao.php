@@ -8,15 +8,6 @@ use PDOException;
 
 class Conexao
 {
-
-    const DB_HOST = "";
-    const DB_USER = "sa";
-    const DB_PASSWORD = "sql123";
-    const DB_NAME = "conexao_php";
-    const DB_DRIVER = "sqlsrv";
-
-    public $connection;
- 
     private function __construct()
     {
         //..
@@ -24,9 +15,7 @@ class Conexao
 
     public static function getConnection()
     {
-
-        $pdoConfig  = "sqlsrv:Server=NOTEBOOK-MARCEL\SQLEXPRESS;";
-        $pdoConfig .= "Database=conexao_php;";
+        $pdoConfig  = "sqlsrv:Server=NOTEBOOK-MARCEL\SQLEXPRESS;Database=conexao_php;";
 
         try {
             if (!isset($connection)) {
