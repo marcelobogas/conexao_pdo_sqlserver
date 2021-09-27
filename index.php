@@ -1,13 +1,23 @@
 <?php
 
+require_once "./vendor/autoload.php";
+
 use App\Database\Conexao;
 
-require "./vendor/autoload.php";
+try {
+    /* executa a consulta no banco dedados */
+    $Conexao = Conexao::getConnection();
+    $query = $Conexao->query("select id, nome, sobrenome from teste");
+    $pessoas = $query->fetchAll();
 
-$Conexao = Conexao::getConnection();
-$query = $Conexao->query("select id, nome, sobrenome from teste");
-$teste = $query->fetchAll();
-
-echo '<pre>';
-print_r($teste);
-echo '</pre>';
+    /* itera os dados da consulta */
+    foreach ($pessoas as $dados) {
+        $pessoa = "ID: (" . $dados['id'];
+        $pessoa .= ") - Nome: " . $dados['nome'];
+        $pessoa .= " " . $dados['sobrenome'];
+        echo $pessoa . "<hr>";
+    }
+} catch (Exception $e) {
+    echo "Erro na conexão: " . $e->getMessage();
+    exit;
+}
